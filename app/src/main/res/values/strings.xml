@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Meteo-App-Java</string>
+
+    <!-- Main Activity -->
+    <string name="current_location">Current Location</string>
+    <string name="last_updated">Last updated: %1$s</string>
+    <string name="today">Today</string>
+    <string name="feels_like">Feels like %1$s</string>
+    <string name="hour_by_hour">Hour by hour</string>
+    <string name="daily_forecast">10-Day Forecast</string>
+    <string name="view_details">View details</string>
+    <string name="humidity">Humidity: %1$s</string>
+    <string name="wind">Wind: %1$s</string>
+    <string name="precipitation">Chance of rain: %1$s</string>
+    <string name="pressure">Pressure: %1$d hPa</string>
+    <string name="sunrise">Sunrise: %1$s</string>
+    <string name="sunset">Sunset: %1$s</string>
+
+    <!-- Search Activity -->
+    <string name="search_hint">Search for a location</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="no_recent_searches">No recent searches</string>
+    <string name="search">Search</string>
+    <string name="remove">Remove</string>
+    <string name="clear_all">Clear All</string>
+    <string name="search_error">Error searching for location</string>
+    <string name="search_no_results">No results found</string>
+
+    <!-- Detailed Forecast Activity -->
+    <string name="detailed_forecast">Detailed Forecast</string>
+    <string name="hourly_forecast">Hourly Forecast</string>
+    <string name="daily_forecast_title">Daily Forecast</string>
+    <string name="swipe_to_view_days">Swipe left/right to view days</string>
+    <string name="tap_for_details">Tap for hour-by-hour details</string>
+    <string name="day">Day</string>
+    <string name="night">Night</string>
+
+    <!-- Permissions -->
+    <string name="location_permission_denied">Location permission denied. Weather information may
+        not be accurate for your current location.</string>
+    <string name="location_permission_rationale">Location permission is needed to show weather for
+        your current location.</string>
+    <string name="location_permission_title">Location Access</string>
+    <string name="grant_permission">Grant Permission</string>
+    <string name="deny">Deny</string>
+
+    <!-- Error Messages -->
+    <string name="error_fetching_weather">Error fetching weather data</string>
+    <string name="error_location">Error getting location</string>
+    <string name="try_again">Try Again</string>
+    <string name="network_error">Network error. Check your connection and try again.</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="units">Units</string>
+    <string name="metric">Metric (°C, m/s)</string>
+    <string name="imperial">Imperial (°F, mph)</string>
+    <string name="language">Language</string>
+    <string name="notifications">Notifications</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+
+    <!-- Exit Confirmation -->
+    <string name="exit_confirmation_title">Exit Application</string>
+    <string name="exit_confirmation_message">Are you sure you want to exit the application?</string>
+    <string name="exit_yes">Yes</string>
+    <string name="exit_no">No</string>
+</resources>

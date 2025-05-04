@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary colors -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorPrimaryLight">#BBDEFB</color>
+    <color name="colorAccent">#FF5252</color>
+
+    <!-- Background colors -->
+    <color name="backgroundColor">#F5F5F5</color>
+    <color name="cardBackground">#FFFFFF</color>
+
+    <!-- Text colors -->
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="textColorHint">#BDBDBD</color>
+
+    <!-- Weather type colors -->
+    <color name="colorSunny">#FFC107</color>
+    <color name="colorCloudy">#BBDEFB</color>
+    <color name="colorRainy">#2196F3</color>
+    <color name="colorStormy">#5C6BC0</color>
+    <color name="colorSnowy">#B3E5FC</color>
+    <color name="colorFoggy">#B0BEC5</color>
+
+    <!-- Divider color -->
+    <color name="dividerColor">#EEEEEE</color>
+</resources>

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "960069765475",
+    "firebase_url": "https://meteo-app-fd5dc-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "meteo-app-fd5dc",
+    "storage_bucket": "meteo-app-fd5dc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960069765475:android:b6f1a64b441b38b581eb56",
+        "android_client_info": {
+          "package_name": "com.meteo_app_java"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs0Y00IxZThNILrdtKKJQO6NhLckbaFBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
