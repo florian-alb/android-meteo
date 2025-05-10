@@ -50,7 +50,6 @@ public class WeatherUtils {
         Log.d(TAG, "Loading weather icon from URL: " + iconUrl);
 
         RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.ic_weather_unknown)
                 .error(R.drawable.ic_weather_unknown);
 
         try {
@@ -61,7 +60,7 @@ public class WeatherUtils {
                     .into(imageView);
         } catch (Exception e) {
             Log.e(TAG, "Error loading weather icon: " + e.getMessage());
-            imageView.setImageResource(getWeatherIconResource(context, iconCode));
+            imageView.setImageResource(R.drawable.ic_weather_unknown);
         }
     }
 

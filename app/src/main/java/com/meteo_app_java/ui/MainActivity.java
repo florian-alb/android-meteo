@@ -29,6 +29,7 @@ import com.meteo_app_java.ui.adapters.HourlyForecastAdapter;
 import com.meteo_app_java.utils.LocationUtils;
 import com.meteo_app_java.utils.PreferencesManager;
 import com.meteo_app_java.utils.WeatherUtils;
+import com.meteo_app_java.widget.WeatherWidgetProvider;
 
 import java.util.Date;
 import java.util.List;
@@ -277,6 +278,9 @@ public class MainActivity extends AppCompatActivity {
         // Set pressure
         String pressureText = getString(R.string.pressure, weather.getPressure());
         binding.tvPressure.setText(pressureText);
+
+        preferencesManager.saveLastWeatherData(weather);
+        WeatherWidgetProvider.updateAllWidgets(this);
     }
 
     private void refreshWeatherData() {
