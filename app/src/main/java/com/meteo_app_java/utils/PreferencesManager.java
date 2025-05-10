@@ -3,11 +3,13 @@ package com.meteo_app_java.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.meteo_app_java.models.Weather;
+
 /**
  * Utility class to manage SharedPreferences operations.
  */
 public class PreferencesManager {
-    private static final String PREF_NAME = "meteo_app_preferences";
+    private static final String PREFERENCES_NAME = "MeteoPreferences";
 
     // Preference keys
     private static final String KEY_USE_METRIC = "use_metric_units";
@@ -19,52 +21,85 @@ public class PreferencesManager {
     private static final String KEY_API_KEY = "api_key";
     private static final String KEY_USE_LOCATION = "use_device_location";
 
-    private final SharedPreferences sharedPreferences;
+    private SharedPreferences preferences;
 
     public PreferencesManager(Context context) {
-        sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
     /**
      * Check if the app is using metric units (°C, m/s, etc.).
      */
     public boolean isUsingMetricUnits() {
-        return sharedPreferences.getBoolean(KEY_USE_METRIC, true);
+        return preferences.getBoolean(KEY_USE_METRIC, true);
     }
 
     /**
      * Set whether to use metric units.
      */
     public void setUseMetricUnits(boolean useMetric) {
-        sharedPreferences.edit().putBoolean(KEY_USE_METRIC, useMetric).apply();
+        preferences.edit().putBoolean(KEY_USE_METRIC, useMetric).apply();
     }
 
     /**
      * Get the last location latitude.
      */
     public double getLastLocationLatitude() {
-        return Double.longBitsToDouble(sharedPreferences.getLong(KEY_LAST_LOCATION_LAT, Double.doubleToLongBits(0.0)));
+        return Double.longBitsToDouble(preferences.getLong(KEY_LAST_LOCATION_LAT, Double.doubleToLongBits(0.0)));
     }
 
     /**
      * Get the last location longitude.
      */
     public double getLastLocationLongitude() {
-        return Double.longBitsToDouble(sharedPreferences.getLong(KEY_LAST_LOCATION_LON, Double.doubleToLongBits(0.0)));
+        return Double.longBitsToDouble(preferences.getLong(KEY_LAST_LOCATION_LON, Double.doubleToLongBits(0.0)));
     }
 
     /**
-     * Get the last location name.
+     * Gets the last saved temperature
+     * @return The temperature value
+     */
+    public double getLastTemperature() {
+        return preferences.getFloat("last_temperature", 0);
+    }
+
+    /**
+     * Gets the last saved location name
+     * @return The location name
      */
     public String getLastLocationName() {
-        return sharedPreferences.getString(KEY_LAST_LOCATION_NAME, null);
+        return preferences.getString("last_location_name", "Unknown");
+    }
+
+    /**
+     * Gets the last saved weather description
+     * @return The weather description
+     */
+    public String getLastWeatherDescription() {
+        return preferences.getString("last_weather_description", "Clear");
+    }
+
+    /**
+     * Gets the last saved weather icon code
+     * @return The icon code (e.g., "01d")
+     */
+    public String getLastWeatherIcon() {
+        return preferences.getString("last_weather_icon", "01d");
+    }
+
+    /**
+     * Gets the timestamp when weather data was last updated
+     * @return The timestamp in milliseconds
+     */
+    public long getLastUpdated() {
+        return preferences.getLong("last_updated", System.currentTimeMillis());
     }
 
     /**
      * Save the last used location.
      */
     public void saveLastLocation(double latitude, double longitude, String locationName) {
-        sharedPreferences.edit()
+        preferences.edit()
                 .putLong(KEY_LAST_LOCATION_LAT, Double.doubleToRawLongBits(latitude))
                 .putLong(KEY_LAST_LOCATION_LON, Double.doubleToRawLongBits(longitude))
                 .putString(KEY_LAST_LOCATION_NAME, locationName)
@@ -73,19 +108,12 @@ public class PreferencesManager {
     }
 
     /**
-     * Get the timestamp when the data was last updated.
-     */
-    public long getLastUpdated() {
-        return sharedPreferences.getLong(KEY_LAST_UPDATED, 0L);
-    }
-
-    /**
      * Check if this is the first launch of the application.
      */
     public boolean isFirstLaunch() {
-        boolean isFirst = sharedPreferences.getBoolean(KEY_FIRST_LAUNCH, true);
+        boolean isFirst = preferences.getBoolean(KEY_FIRST_LAUNCH, true);
         if (isFirst) {
-            sharedPreferences.edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
+            preferences.edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
         }
         return isFirst;
     }
@@ -94,34 +122,50 @@ public class PreferencesManager {
      * Store the OpenWeatherMap API key.
      */
     public void saveApiKey(String apiKey) {
-        sharedPreferences.edit().putString(KEY_API_KEY, apiKey).apply();
+        preferences.edit().putString(KEY_API_KEY, apiKey).apply();
     }
 
     /**
      * Get the stored API key.
      */
     public String getApiKey() {
-        return sharedPreferences.getString(KEY_API_KEY, "5796abbde9106b7da4febfae8c44c232");
+        return preferences.getString(KEY_API_KEY, "5796abbde9106b7da4febfae8c44c232");
     }
 
     /**
      * Check if the app should use the device's location.
      */
     public boolean shouldUseDeviceLocation() {
-        return sharedPreferences.getBoolean(KEY_USE_LOCATION, true);
+        return preferences.getBoolean(KEY_USE_LOCATION, true);
     }
 
     /**
      * Set whether to use the device's location.
      */
     public void setUseDeviceLocation(boolean useLocation) {
-        sharedPreferences.edit().putBoolean(KEY_USE_LOCATION, useLocation).apply();
+        preferences.edit().putBoolean(KEY_USE_LOCATION, useLocation).apply();
     }
 
     /**
      * Clear all preferences.
      */
     public void clearPreferences() {
-        sharedPreferences.edit().clear().apply();
+        preferences.edit().clear().apply();
+    }
+
+    /**
+     * Saves the last weather data for use in the widget
+     * @param weather The weather object containing data to save
+     */
+    public void saveLastWeatherData(Weather weather) {
+        if (weather == null) return;
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("last_location_name", weather.getCityName());
+        editor.putFloat("last_temperature", (float) weather.getTemperature());
+        editor.putString("last_weather_description", weather.getWeatherDescription());
+        editor.putString("last_weather_icon", weather.getWeatherIcon());
+        editor.putLong("last_updated", System.currentTimeMillis());
+        editor.apply();
     }
 }
